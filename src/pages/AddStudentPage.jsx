@@ -135,28 +135,6 @@ const AddStudent = () => {
     fetchColleges();
   }, []);
 
-  useEffect(() => {
-    const loadUserData = async () => {
-      const user = auth.currentUser;
-      if (user) {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          setStudent(prev => ({
-            ...prev,
-            reference: {
-              ...prev.reference,
-              consultancyName: userData.userType === "Freelance Associate"
-                ? ""
-                : userData.consultancyName || ""
-            }
-          }));
-        }
-      }
-    };
-
-    loadUserData();
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
