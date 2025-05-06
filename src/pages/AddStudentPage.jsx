@@ -191,13 +191,6 @@ const AddStudent = () => {
       return;
     }
 
-    const user = auth.currentUser;
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-    if (!user) {
-      setModalMessage({ name: "Error", text: "User not authenticated." });
-      setIsModalOpen(true);
-      return;
-    }
 
     setSubmissionStatus("loading");
 
