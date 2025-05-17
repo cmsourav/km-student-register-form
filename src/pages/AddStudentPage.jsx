@@ -10,7 +10,7 @@ const validateStudent = (student) => {
     "studentId", "candidateName", "candidateNumber",
     "college", "course", "whatsappNumber", "dob",
     "gender", "fatherName", "parentNumber", "adhaarNumber",
-    "place", "candidateEmail",
+    "place", "candidateEmail", "reference.userType"
   ];
 
   requiredFields.forEach((key) => {
@@ -104,6 +104,7 @@ const AddStudent = () => {
     paymentRemark: "",
     createdBy: "",
     reference: {
+      userType: "",
       userName: "",
       consultancyName: ""
     }
@@ -134,7 +135,6 @@ const AddStudent = () => {
 
     fetchColleges();
   }, []);
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -191,7 +191,6 @@ const AddStudent = () => {
       return;
     }
 
-
     setSubmissionStatus("loading");
 
     const studentData = {
@@ -230,6 +229,7 @@ const AddStudent = () => {
         paymentRemark: "",
         createdBy: "",
         reference: {
+          userType: "",
           userName: "",
           consultancyName: ""
         }
@@ -656,7 +656,7 @@ const AddStudent = () => {
                 </div>
               </div>
 
-                     {/* Reference Section */}
+              {/* Reference Section */}
               <div className="form-section">
                 <div className="section-header">
                   <svg className="section-icon" viewBox="0 0 24 24">
@@ -667,6 +667,47 @@ const AddStudent = () => {
                 <div className="input-grid">
                   <div className="input-group">
                     <label className="input-label">
+                      User Type <span className="required">*</span>
+                    </label>
+                    <select
+                      name="reference.userType"
+                      value={student.reference?.userType || ""}
+                      onChange={(e) => {
+                        handleChange(e);
+                        // Auto-fill consultancy name if Freelance Associate is selected
+                        if (e.target.value === "Associate") {
+                          setStudent(prev => ({
+                            ...prev,
+                            reference: {
+                              ...prev.reference,
+                              consultancyName: "Associate"
+                            }
+                          }));
+                        } else if (e.target.value === "Direct") {
+                          setStudent(prev => ({
+                            ...prev,
+                            reference: {
+                              ...prev.reference,
+                              userName: "Direct",
+                              consultancyName: ""
+                            }
+                          }));
+                        }
+                      }}
+                      className={`form-input ${formErrors["reference.userType"] ? "error" : ""}`}
+                    >
+                      <option value="">Select User Type</option>
+                      <option value="Direct">Direct</option>
+                      <option value="Associate">Associate</option>
+                      <option value="Consultancy">Consultancy</option>
+                    </select>
+                    {formErrors["reference.userType"] && (
+                      <div className="error-message">{formErrors["reference.userType"]}</div>
+                    )}
+                  </div>
+
+                  <div className="input-group">
+                    <label className="input-label">
                       Reference Name
                     </label>
                     <input
@@ -675,7 +716,10 @@ const AddStudent = () => {
                       value={student.reference?.userName || ""}
                       onChange={handleChange}
                       placeholder="Enter reference name"
-                      className={`form-input ${formErrors["reference.userName"] ? "error" : ""}`}
+                      disabled={student.reference?.userType === "Direct"}
+                      className={`form-input ${formErrors["reference.userName"] ? "error" : ""} ${
+                        student.reference?.userType === "Direct" ? "disabled" : ""
+                      }`}
                     />
                     {formErrors["reference.userName"] && (
                       <div className="error-message">{formErrors["reference.userName"]}</div>
@@ -692,7 +736,10 @@ const AddStudent = () => {
                       value={student.reference?.consultancyName || ""}
                       onChange={handleChange}
                       placeholder="Enter consultancy name"
-                      className="form-input"
+                      disabled={student.reference?.userType !== "Consultancy"}
+                      className={`form-input ${
+                        student.reference?.userType !== "Consultancy" ? "disabled" : ""
+                      }`}
                     />
                   </div>
                 </div>
