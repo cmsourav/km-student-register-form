@@ -196,6 +196,7 @@ const AddStudent = () => {
 
     const studentData = {
       ...student,
+      applicationStatus: "Enquiry",
       createdAt: Timestamp.now(),
       createdBy: "student"
     };
@@ -309,9 +310,6 @@ const AddStudent = () => {
                 onClick={handleVerify}
               >
                 Verify Student
-                {/* <svg className="button-icon" viewBox="0 0 24 24">
-                  <path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A9,9 0 0,0 21,12A9,9 0 0,0 12,3Z" />
-                </svg> */}
               </button>
             </div>
           </div>
@@ -573,48 +571,6 @@ const AddStudent = () => {
                 </div>
               </div>
 
-              {/* Reference Section */}
-              <div className="form-section">
-                <div className="section-header">
-                  <svg className="section-icon" viewBox="0 0 24 24">
-                    <path fill="#ff0000" d="M16,14H17.5V16.82L19.94,18.23L19.19,19.53L16,17.69V14M17,12A5,5 0 0,0 12,17A5,5 0 0,0 17,22A5,5 0 0,0 22,17A5,5 0 0,0 17,12M12,13.47C12,12.65 11.3,12 10.5,12C9.7,12 9,12.65 9,13.47V14H12V13.47M6,6H18C19.1,6 20,6.9 20,8V12.1C19.68,12.04 19.34,12 19,12C18.66,12 18.32,12.04 18,12.1V8H6V19H12.1C12.21,19.72 12.46,20.39 12.81,21H6C4.9,21 4,20.1 4,19V8C4,6.9 4.9,6 6,6M10,1H14V3H10V1Z" />
-                  </svg>
-                  <h3 className="section-title">Reference Information</h3>
-                </div>
-                <div className="input-grid">
-                  <div className="input-group">
-                    <label className="input-label">
-                      Reference Name
-                    </label>
-                    <input
-                      type="text"
-                      name="reference.userName"
-                      value={student.reference?.userName || ""}
-                      onChange={handleChange}
-                      placeholder="Enter reference name"
-                      className={`form-input ${formErrors["reference.userName"] ? "error" : ""}`}
-                    />
-                    {formErrors["reference.userName"] && (
-                      <div className="error-message">{formErrors["reference.userName"]}</div>
-                    )}
-                  </div>
-
-                  <div className="input-group">
-                    <label className="input-label">
-                      Consultancy Name
-                    </label>
-                    <input
-                      type="text"
-                      name="reference.consultancyName"
-                      value={student.reference?.consultancyName || ""}
-                      onChange={handleChange}
-                      placeholder="Enter consultancy name"
-                      className="form-input"
-                    />
-                  </div>
-                </div>
-              </div>
-
               {/* Academic Section */}
               <div className="form-section">
                 <div className="section-header">
@@ -694,6 +650,48 @@ const AddStudent = () => {
                       value={student.lastQualificationMarks}
                       onChange={handleChange}
                       placeholder="Enter mark percentage"
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+              </div>
+
+                     {/* Reference Section */}
+              <div className="form-section">
+                <div className="section-header">
+                  <svg className="section-icon" viewBox="0 0 24 24">
+                    <path fill="#ff0000" d="M16,14H17.5V16.82L19.94,18.23L19.19,19.53L16,17.69V14M17,12A5,5 0 0,0 12,17A5,5 0 0,0 17,22A5,5 0 0,0 22,17A5,5 0 0,0 17,12M12,13.47C12,12.65 11.3,12 10.5,12C9.7,12 9,12.65 9,13.47V14H12V13.47M6,6H18C19.1,6 20,6.9 20,8V12.1C19.68,12.04 19.34,12 19,12C18.66,12 18.32,12.04 18,12.1V8H6V19H12.1C12.21,19.72 12.46,20.39 12.81,21H6C4.9,21 4,20.1 4,19V8C4,6.9 4.9,6 6,6M10,1H14V3H10V1Z" />
+                  </svg>
+                  <h3 className="section-title">Reference Information</h3>
+                </div>
+                <div className="input-grid">
+                  <div className="input-group">
+                    <label className="input-label">
+                      Reference Name
+                    </label>
+                    <input
+                      type="text"
+                      name="reference.userName"
+                      value={student.reference?.userName || ""}
+                      onChange={handleChange}
+                      placeholder="Enter reference name"
+                      className={`form-input ${formErrors["reference.userName"] ? "error" : ""}`}
+                    />
+                    {formErrors["reference.userName"] && (
+                      <div className="error-message">{formErrors["reference.userName"]}</div>
+                    )}
+                  </div>
+
+                  <div className="input-group">
+                    <label className="input-label">
+                      Consultancy Name
+                    </label>
+                    <input
+                      type="text"
+                      name="reference.consultancyName"
+                      value={student.reference?.consultancyName || ""}
+                      onChange={handleChange}
+                      placeholder="Enter consultancy name"
                       className="form-input"
                     />
                   </div>
