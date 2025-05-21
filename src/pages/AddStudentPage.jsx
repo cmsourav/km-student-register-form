@@ -195,7 +195,7 @@ const AddStudent = () => {
 
     const studentData = {
       ...student,
-      applicationStatus: "Enquiry",
+      applicationStatus: "enquiry",
       createdAt: Timestamp.now(),
       createdBy: "student"
     };
