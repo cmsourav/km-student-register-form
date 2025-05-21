@@ -10,8 +10,8 @@ const validateStudent = (student) => {
     "studentId", "candidateName", "candidateNumber",
     "college", "course", "whatsappNumber", "dob",
     "gender", "fatherName", "parentNumber", "adhaarNumber",
-    "place", "candidateEmail", "reference.userType",
-    "address", "motherName", "motherNumber", 
+    "candidateEmail", "reference.userType",
+    "address", "motherName", "motherNumber",
     "religion", "state", "district", "pincode"
   ];
 
@@ -48,12 +48,12 @@ const validateStudent = (student) => {
   }
 
   if (student.motherNumber && !/^\d{10}$/.test(student.motherNumber)) {
-  errors.motherNumber = "Enter a valid 10-digit number.";
-}
+    errors.motherNumber = "Enter a valid 10-digit number.";
+  }
 
-if (student.pincode && !/^\d{6}$/.test(student.pincode)) {
-  errors.pincode = "Enter a valid 6-digit pincode.";
-}
+  if (student.pincode && !/^\d{6}$/.test(student.pincode)) {
+    errors.pincode = "Enter a valid 6-digit pincode.";
+  }
 
   return errors;
 };
@@ -235,7 +235,13 @@ const AddStudent = () => {
         parentNumber: "",
         alternativeNumber: "",
         adhaarNumber: "",
-        place: "",
+        address: "",
+        motherName: "",
+        motherNumber: "",
+        religion: "",
+        state: "",
+        district: "",
+        pincode: "",
         plusTwoRegNumber: "",
         plusTwoSchoolName: "",
         plusTwoSchoolPlace: "",
@@ -505,6 +511,44 @@ const AddStudent = () => {
 
                   <div className="input-group">
                     <label className="input-label">
+                      Aadhaar Number <span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="adhaarNumber"
+                      value={student.adhaarNumber}
+                      onChange={handleChange}
+                      placeholder="Enter 12-digit Aadhaar number"
+                      className={`form-input ${formErrors.adhaarNumber ? "error" : ""}`}
+                    />
+                    {formErrors.adhaarNumber && (
+                      <div className="error-message">{formErrors.adhaarNumber}</div>
+                    )}
+                  </div>
+
+                  <div className="input-group">
+                    <label className="input-label">
+                      Religion <span className="required">*</span>
+                    </label>
+                    <select
+                      name="religion"
+                      value={student.religion}
+                      onChange={handleChange}
+                      className={`form-input ${formErrors.religion ? "error" : ""}`}
+                    >
+                      <option value="">Select Religion</option>
+                      <option value="Hindu">Hindu</option>
+                      <option value="Muslim">Muslim</option>
+                      <option value="Christian">Christian</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    {formErrors.religion && (
+                      <div className="error-message">{formErrors.religion}</div>
+                    )}
+                  </div>
+
+                  <div className="input-group">
+                    <label className="input-label">
                       Father's Name <span className="required">*</span>
                     </label>
                     <input
@@ -539,54 +583,6 @@ const AddStudent = () => {
 
                   <div className="input-group">
                     <label className="input-label">
-                      Alternative Number
-                    </label>
-                    <input
-                      type="text"
-                      name="alternativeNumber"
-                      value={student.alternativeNumber}
-                      onChange={handleChange}
-                      placeholder="Enter alternative number"
-                      className="form-input"
-                    />
-                  </div>
-
-                  <div className="input-group">
-                    <label className="input-label">
-                      Aadhaar Number <span className="required">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="adhaarNumber"
-                      value={student.adhaarNumber}
-                      onChange={handleChange}
-                      placeholder="Enter 12-digit Aadhaar number"
-                      className={`form-input ${formErrors.adhaarNumber ? "error" : ""}`}
-                    />
-                    {formErrors.adhaarNumber && (
-                      <div className="error-message">{formErrors.adhaarNumber}</div>
-                    )}
-                  </div>
-
-                  <div className="input-group">
-                    <label className="input-label">
-                      Address <span className="required">*</span>
-                    </label>
-                    <textarea
-                      name="address"
-                      value={student.address}
-                      onChange={handleChange}
-                      placeholder="Enter full address"
-                      className={`form-input ${formErrors.address ? "error" : ""}`}
-                      rows="3"
-                    />
-                    {formErrors.address && (
-                      <div className="error-message">{formErrors.address}</div>
-                    )}
-                  </div>
-
-                  <div className="input-group">
-                    <label className="input-label">
                       Mother's Name <span className="required">*</span>
                     </label>
                     <input
@@ -616,27 +612,6 @@ const AddStudent = () => {
                     />
                     {formErrors.motherNumber && (
                       <div className="error-message">{formErrors.motherNumber}</div>
-                    )}
-                  </div>
-
-                  <div className="input-group">
-                    <label className="input-label">
-                      Religion <span className="required">*</span>
-                    </label>
-                    <select
-                      name="religion"
-                      value={student.religion}
-                      onChange={handleChange}
-                      className={`form-input ${formErrors.religion ? "error" : ""}`}
-                    >
-                      <option value="">Select Religion</option>
-                      <option value="Hindu">Hindu</option>
-                      <option value="Muslim">Muslim</option>
-                      <option value="Christian">Christian</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    {formErrors.religion && (
-                      <div className="error-message">{formErrors.religion}</div>
                     )}
                   </div>
 
@@ -690,6 +665,25 @@ const AddStudent = () => {
                       <div className="error-message">{formErrors.pincode}</div>
                     )}
                   </div>
+
+
+                  <div className="input-group">
+                    <label className="input-label">
+                      Address <span className="required">*</span>
+                    </label>
+                    <textarea
+                      name="address"
+                      value={student.address}
+                      onChange={handleChange}
+                      placeholder="Enter full address"
+                      className={`form-input ${formErrors.address ? "error" : ""}`}
+                      rows="3"
+                    />
+                    {formErrors.address && (
+                      <div className="error-message">{formErrors.address}</div>
+                    )}
+                  </div>
+
                 </div>
               </div>
 
