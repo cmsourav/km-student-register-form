@@ -112,6 +112,7 @@ const AddStudent = () => {
     district: "",
     pincode: "",
     plusTwoRegNumber: "",
+    stream: "",
     plusTwoSchoolName: "",
     plusTwoSchoolPlace: "",
     lastQualification: "",
@@ -243,6 +244,7 @@ const AddStudent = () => {
         district: "",
         pincode: "",
         plusTwoRegNumber: "",
+        stream: "",
         plusTwoSchoolName: "",
         plusTwoSchoolPlace: "",
         lastQualification: "",
@@ -706,6 +708,20 @@ const AddStudent = () => {
                       value={student.plusTwoRegNumber}
                       onChange={handleChange}
                       placeholder="Enter register number"
+                      className="form-input"
+                    />
+                  </div>
+
+                  <div className="input-group">
+                    <label className="input-label">
+                     Stream
+                    </label>
+                    <input
+                      type="text"
+                      name="stream"
+                      value={student.stream}
+                      onChange={handleChange}
+                      placeholder="Enter your stream"
                       className="form-input"
                     />
                   </div>
